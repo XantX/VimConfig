@@ -52,6 +52,7 @@ Plug 'KabbAmine/zeavim.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'neoclide/coc.nvim', {'branch':'release'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+Plug 'tpope/vim-fugitive'
 "Plug 'xuhdev/vim-latex-live-preview', {'for': 'tex'}
 call plug#end()
 "Config Latex
@@ -63,10 +64,10 @@ let g:markdown_fenced_lenguages = [
 	\]
 "Configuración de markDown
 let g:mkdp_auto_start = 1
+
 "Configuración de COC
 " TextEdit might fail if hidden is not set.
 set hidden
-
 " Some servers have issues with backup files, see #649.
 set nobackup
 set nowritebackup
@@ -111,11 +112,13 @@ if exists('*complete_info')
 else
   inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
+"Solo funcionan si están son un server de lenguaje activo
 " GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+"nmap <silent> gD <Plug>(coc-definition)
+"nmap <silent> gY <Plug>(coc-type-definition)
+"nmap <silent> gI <Plug>(coc-implementation)
+"nmap <silent> gR <Plug>(coc-references)
+
 "Airline extention
 let g:airline#extensions#coc#enabled = 1
 "Comando de themas
@@ -124,6 +127,7 @@ let g:gruvbox_contrast_dark = "hard"
 
 "Comando de NerdTree
 let NERDTreeQuitOnOpen=1
+"Airline config style
 let g:Powerline_symbols = "fancy"
 let g:Powerline_dividers_override = ["\Ue0b0","\Ue0b1","\Ue0b2","\Ue0b3"]
 let g:Powerline_symbols_override = {'BRANCH': "\Ue0a0", 'LINE': "\Ue0a1", 'RO': "\Ue0a2"}
@@ -177,7 +181,9 @@ nmap gZ <Plug>ZVKeyDocset<CR>
 nmap gz <Plug>ZVOperator
 
 "Atajos de teclado
-"imap <Leader>e <ESC>
+"Atajos de git
+nmap <Leader>gs :G<CR>
+nmap <Leader>gc :Gcommit<CR>
 "Busca los nombres que contiene las dos letras
 nmap <Leader>s <Plug>(easymotion-s2)
 nmap <Leader>nt :NERDTreeFind<CR>
@@ -187,7 +193,8 @@ nmap <Leader>q :q<CR>
 nmap <Leader>ne :bnext<CR> 
 nmap <Leader>e :bd<CR>
 "Atajo abre terminal
-nmap <Leader>t :terminal<CR>
+nmap <Leader>t :vert terminal<CR>
+nmap <Leader>vs :vsp <CR>
 "Atajo para abrir .vimrc
 nmap <Leader>rc :e $MYVIMRC<CR>
 "Spell checker
